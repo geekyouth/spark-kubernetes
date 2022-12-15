@@ -1,9 +1,9 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: spark-master
+  name: spark-worker
   labels:
-    app: spark-master
+    app: spark-worker
   annotations:
     dev.okteto.com/auto-ingress: "true"
     # https://www.okteto.com/docs/cloud/ssl/
@@ -12,12 +12,8 @@ spec:
   ports:
     # okteto 只会暴露第一个
     - name: webui
-      port: 8080
+      port: 8081
       protocol: TCP
-      targetPort: 8080
-    - name: spark-master
-      port: 7077
-      protocol: TCP
-      targetPort: 7077
+      targetPort: 8081
   selector:
-    component: spark-master
+    component: spark-worker
